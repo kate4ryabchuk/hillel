@@ -2,6 +2,7 @@
 
 const gulp = require('gulp'),
       watch = require('gulp-watch'),
+      babel = require('gulp-babel'),
       prefixer = require('gulp-autoprefixer'),
       uglify = require('gulp-uglify'),
       // sass = require('gulp-sass'),
@@ -63,6 +64,7 @@ gulp.task('js', () => {
     return gulp.src(path.src.js)
           .pipe(rigger())
           .pipe(sourcemaps.init())
+          .pipe(babel({presets: ['env']}))
           .pipe(uglify())
           .pipe(sourcemaps.write())
           .pipe(gulp.dest(path.build.js))
