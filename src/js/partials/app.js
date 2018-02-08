@@ -9,12 +9,17 @@ $(document).ready(function () {
             //console.log(products[category][company]);
 
             products[category][company].items.map(item => {
-                // заходи в товары
+                // заходим в товары
 
                 console.log(item);
             });
         });
     });
+
+    $('.btn-sing').click(function () {
+        validateSing($('#login').val());
+    })
+
 
 });
 

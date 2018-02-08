@@ -37,3 +37,8 @@ const products = {
 
     }
 };
+
+const users = {
+    george: {name: 'George', password: 'test'},
+    test: {name: 'Test', password: '1'}
+};
