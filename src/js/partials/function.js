@@ -8,7 +8,7 @@ function validateSing (name, password) {
         name.addClass('is-valid').removeClass('is-invalid');
         console.log('Логин правильный');
 
-        if(users[loginVal].password === password.val()){
+        if (users[loginVal].password === password.val()) {
             // Проходем вход, прячем форму
 
             $('.account').text('').append($('<h4>Аккаунт</h4>'), $(`<h3>${users[loginVal].name}</h3>`));

@@ -16,10 +16,13 @@ $(document).ready(function () {
     //     });
     // });
 
-    $('.btn-sing').click(function () {
+    $('.btn-sing').click(() => {
         validateSing($('#login'), $('#password'));
-    })
+    });
 
+    $('.btn-create').click(() => {
+        $('#modal-create').modal();
+    });
 
 });
 
