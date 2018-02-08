@@ -24,6 +24,8 @@ $(document).ready(function () {
         $('#modal-create').modal();
     });
 
+    getUserStory();
+
 });
 
 

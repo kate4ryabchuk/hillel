@@ -11,7 +11,10 @@ function validateSing (name, password) {
         if (users[loginVal].password === password.val()) {
             // Проходем вход, прячем форму
 
-            $('.account').text('').append($('<h4>Аккаунт</h4>'), $(`<h3>${users[loginVal].name}</h3>`));
+            addAccount(loginVal);
+
+            userEnter = users[loginVal];
+            sessionStorage.setItem('userEnter', JSON.stringify(userEnter));
 
             password.removeClass('is-invalid');
             console.log(users[loginVal]);
@@ -34,4 +37,20 @@ function validateSing (name, password) {
 
 function validateLogin (val) {
     return $('#login').val() === val
+}
+
+function getUserStory () {
+    const userStory = JSON.parse(sessionStorage.getItem('userEnter'));
+
+    if (userStory) {
+        const name = userStory.name.toLowerCase();
+
+        addAccount(name);
+
+        console.log(users[name]);
+    }
+}
+
+function addAccount (user) {
+    $('.account').text('').append($('<h4>Аккаунт</h4>'), $(`<h3>${users[user].name}</h3>`));
 }
