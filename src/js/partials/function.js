@@ -5,14 +5,14 @@ function validateSing (name, password) {
     if (validateLog) {
         //
 
-        name.addClass('is-valid');
-        name.removeClass('is-invalid');
+        name.addClass('is-valid').removeClass('is-invalid');
         console.log('Логин правильный');
 
         if(users[loginVal].password === password.val()){
             // Проходем вход, прячем форму
 
-            //$('.actions').text('');
+            $('.account').text('').append($('<h4>Аккаунт</h4>'), $(`<h3>${users[loginVal].name}</h3>`));
+
             password.removeClass('is-invalid');
             console.log(users[loginVal]);
             console.log('enter');
@@ -26,8 +26,7 @@ function validateSing (name, password) {
     } else {
         //
 
-        name.removeClass('is-valid');
-        name.addClass('is-invalid');
+        name.removeClass('is-valid').addClass('is-invalid');
         console.log('Не правильный логин');
     }
 
@@ -36,8 +35,3 @@ function validateSing (name, password) {
 function validateLogin (val) {
     return $('#login').val() === val
 }
-
-function validatePassword (val) {
-    return $('#password').val() === val
-}
-
