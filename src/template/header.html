@@ -19,20 +19,30 @@
 				        aria-haspopup="true" aria-expanded="false">
 					Акаунт
 				</button>
-				<div class="dropdown-menu">
-					<form class="px-4 py-3">
+				<div class="dropdown-menu dropdown-menu-right">
+					<form class="px-2 py-1">
 						<div class="form-group">
 							<label for="login">Login</label>
 							<input type="text" class="form-control" id="login" placeholder="login">
+							<div class="valid-feedback">
+								login is valid!
+							</div>
+							<div class="invalid-feedback">
+								login is in-valid!
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="password">Password</label>
 							<input type="password" class="form-control" id="password" placeholder="password">
+							<div class="invalid-feedback">
+								password is in-valid!
+							</div>
 						</div>
-						<button type="button" class="btn btn-primary btn-block">Sign in</button>
+						<button type="button" class="btn btn-primary btn-block btn-sing">Sign in</button>
+						<button type="button" class="btn btn-warning btn-block btn-create">Create account</button>
 					</form>
 					<div class="dropdown-divider"></div>
-					<button class="btn btn-warning btn-block">Create account</button>
+					<button class="btn btn-danger btn-block" type="button">Close</button>
 				</div>
 			</div>
 			<!--Корзина-->
