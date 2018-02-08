@@ -50,16 +50,17 @@ const config = {
     port: 3000,
     logPrefix: "Hillel"
 };
+
 // Html
-gulp.task('html', function () {
-    gulp.src(path.src.html)
+gulp.task('html', () => {
+    return gulp.src(path.src.html)
           .pipe(rigger())
           .pipe(gulp.dest(path.build.html))
           .pipe(reload({stream: true}));
 });
 // JavaScript
-gulp.task('js', function () {
-    gulp.src(path.src.js)
+gulp.task('js', () => {
+    return gulp.src(path.src.js)
           .pipe(rigger())
           .pipe(sourcemaps.init())
           .pipe(uglify())
@@ -68,8 +69,8 @@ gulp.task('js', function () {
           .pipe(reload({stream: true}));
 });
 // Styles
-gulp.task('style', function () {
-    gulp.src(path.src.style)
+gulp.task('style', () => {
+    return gulp.src(path.src.style)
           .pipe(sourcemaps.init())
           .pipe(less())
           .pipe(prefixer({
@@ -82,8 +83,8 @@ gulp.task('style', function () {
           .pipe(reload({stream: true}));
 });
 // Images
-gulp.task('image', function () {
-    gulp.src(path.src.img)
+gulp.task('image', () => {
+    return gulp.src(path.src.img)
           .pipe(imagemin({
               progressive: true,
               svgoPlugins: [{removeViewBox: false}],
@@ -94,43 +95,37 @@ gulp.task('image', function () {
           .pipe(reload({stream: true}));
 });
 // Fonts
-gulp.task('fonts', function () {
-    gulp.src(path.src.fonts)
+gulp.task('fonts', () => {
+    return gulp.src(path.src.fonts)
           .pipe(gulp.dest(path.build.fonts))
 });
-// Build
-gulp.task('build', [
-    'html',
-    'js',
-    'style',
-    'image',
-    'fonts'
-]);
+// Clean
+gulp.task('clean', (cb) => {
+    rimraf(path.clean, cb);
+});
+// Webserver
+gulp.task('webserver', () => {
+    browserSync(config);
+});
 // Watch
-gulp.task('watch', function () {
-    watch([path.watch.html], function (event, cb) {
+gulp.task('watch', () => {
+    watch([path.watch.html], (event, cb) => {
         gulp.start('html');
     });
-    watch([path.watch.style], function (event, cb) {
+    watch([path.watch.style], (event, cb) => {
         gulp.start('style');
     });
-    watch([path.watch.js], function (event, cb) {
+    watch([path.watch.js], (event, cb) => {
         gulp.start('js');
     });
-    watch([path.watch.img], function (event, cb) {
+    watch([path.watch.img], (event, cb) => {
         gulp.start('image');
     });
-    watch([path.watch.fonts], function (event, cb) {
+    watch([path.watch.fonts], (event, cb) => {
         gulp.start('fonts');
     });
 });
-
-gulp.task('webserver', function () {
-    browserSync(config);
-});
-
-gulp.task('clean', function (cb) {
-    rimraf(path.clean, cb);
-});
-
+// Build
+gulp.task('build', ['html', 'js', 'style', 'image', 'fonts']);
+// Default gulp
 gulp.task('default', ['build', 'webserver', 'watch']);
