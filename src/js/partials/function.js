@@ -105,27 +105,6 @@ function showCategory () {
 
 showCategory();
 
-// function showCompany (category, itemParent) {
-//
-//     $('#navbar .list-group ul').html('');
-//
-//     let ul = $('<ul class="list-group"></ul>');
-//
-//
-//
-//     Object.keys(products[category]).map(company => {
-//         // заходим в компании
-//         //console.log(products[category][company]);
-//
-//         const li = $(`<li class="list-group-item list-group-item-action">${company}</li>`);
-//         ul.append(li);
-//
-//
-//         console.log(company);
-//     });
-//     itemParent.append(ul);
-// }
-
 function showPopularProd () {
     Object.keys(products.Popular).map(company => {
         console.log(products);
@@ -137,7 +116,7 @@ function showPopularProd () {
             console.log(item);
             const parent = $('.popular-products .out-item');
             const itemBlock = $(`<div class="col-3 item"></div>`);
-            const itemBody = $(`<img src="${item.src}"><span>${item.name}</span><br><span>$${item.price}</span>`);
+            const itemBody = $(`<div class="body"><img src="${item.src}"><span>${item.name}</span><br><span>$${item.price}</span></div>`);
             const itemBtn = $('<div class="row btns"><button class="btn bg-info btn-sm">В корзину</button><button class="btn bg-warning btn-sm">Оформить заказ</button></div>');
             itemBlock.append(itemBody, itemBtn);
             itemBlock.attr({
