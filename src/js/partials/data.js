@@ -155,6 +155,26 @@ const products = {
             ]
         }
 
+    },
+
+    popular: {
+        apple: {
+            name: "Apple",
+            items: [
+                {
+                    name: 'Macbook pro TB Retina',
+                    price: 5000,
+                    amount: 13,
+                    src: "../../img/macbook.jpg"
+                },
+                {
+                    name: 'Iphone X',
+                    price: 1500,
+                    amount: 33,
+                    src: "../../img/aphone_x.jpg"
+                }
+            ]
+        }
     }
 };
 

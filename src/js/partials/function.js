@@ -54,3 +54,46 @@ function getUserStory () {
 function addAccount (user) {
     $('.account').text('').append($('<h4>Аккаунт</h4>'), $(`<h3>${users[user].name}</h3>`));
 }
+
+function addPopularItems () {
+
+    Object.keys(products).map(category => {
+        // заходим в категории
+        //console.log(Object.keys(products[category]));
+
+        console.log(category);
+
+        Object.keys(products[category]).map(company => {
+            // заходим в компании
+            //console.log(products[category][company]);
+
+            products[category][company].items.map(item => {
+                // заходим в товары
+
+                //console.log(item);
+            });
+        });
+    });
+
+}
+
+function showPopularProd () {
+    Object.keys(products.popular).map(company => {
+        console.log(products);
+        const parent = $('.popular-products .out-item');
+        const h4 = $(`<h6>${products.popular[company].name}</h6>`);
+        parent.append(h4);
+
+        products.popular[company].items.map((item, index) => {
+            console.log(item);
+            const parent = $('.popular-products .out-item');
+            const itemBlock = $(`<div class="col-3 item"></div>`);
+            const itemBody = $(`<img src="${item.src}"><span>${item.name}</span><br><span>$${item.price}</span>`);
+            const itemBtn = $('<div class="row btns"><button class="btn bg-info btn-sm">В корзину</button><button class="btn bg-warning btn-sm">Оформить заказ</button></div>');
+            itemBlock.append(itemBody, itemBtn);
+            itemBlock.attr({'data-category':'popular', 'data-compmany': products.popular[company].name.toLowerCase(), 'data-index': index});
+            parent.append(itemBlock);
+        });
+
+    });
+}
