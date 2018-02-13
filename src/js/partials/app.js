@@ -9,6 +9,7 @@ $(document).ready(function () {
     });
 
     showPopularProd();
+    showCategory();
     getUserStory();
 
 });

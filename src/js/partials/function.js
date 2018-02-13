@@ -55,6 +55,50 @@ function addAccount (user) {
     $('.account').text('').append($('<h4>Аккаунт</h4>'), $(`<h3>${users[user].name}</h3>`));
 }
 
+function addCompany (userCompany) {
+    let parent = $('#navbar .dropdown-menu');
+    parent.text('');
+
+    Object.keys(products[userCompany]).map(company => {
+        const itemCompany = $(`<a class="dropdown-item" href="#">${products[userCompany][company].name}</a>`);
+        parent.append(itemCompany);
+    });
+    const itemAll = $(`<a class="dropdown-item" href="#">All</a>`);
+    parent.prepend(itemAll);
+}
+
+function showPopularProd () {
+    Object.keys(products.Popular).map(company => {
+        const parent = $('.popular-products .out-item'),
+              h4 = $(`<h6>${products.Popular[company].name}</h6>`);
+        parent.append(h4);
+
+        products.Popular[company].items.map((item, index) => {
+            const parent = $('.popular-products .out-item'),
+                  itemBlock = $(`<div class="col-3 item"></div>`),
+                  itemBody = $(`<div class="body"><img src="${item.src}"><span>${item.name}</span><br><span>$${item.price}</span></div>`),
+                  itemBtn = $('<div class="row btns"><button class="btn bg-info btn-sm">В корзину</button><button class="btn bg-warning btn-sm">Оформить заказ</button></div>');
+            itemBlock.append(itemBody, itemBtn);
+            itemBlock.attr({
+                'data-category': 'popular',
+                'data-compmany': products.Popular[company].name.toLowerCase(),
+                'data-index': index
+            });
+            parent.append(itemBlock);
+        });
+    });
+}
+
+function showCategory () {
+    const parent = $('#navbar .nav');
+    Object.keys(products).map(category => {
+        const categoryItem = $(`<li class="nav-item"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">${category}</a><div class="dropdown-menu"></div></li>`).mousemove(function () {
+            addCompany(category);
+        });
+        parent.append(categoryItem);
+    });
+}
+
 function addPopularItems () {
 
     Object.keys(products).map(category => {
@@ -75,57 +119,4 @@ function addPopularItems () {
         });
     });
 
-}
-
-
-function showCategory () {
-    const parent = $('#navbar .nav');
-
-    Object.keys(products).map(category => {
-        function addCompany (userCompany) {
-            let parent = $('#navbar .dropdown-menu');
-            parent.text('');
-
-            Object.keys(products[userCompany]).map(company => {
-                // заходим в компании
-                //console.log(products[category][company]);
-
-                const itemCompany = $(`<a class="dropdown-item" href="#">${company}</a>`);
-                parent.append(itemCompany);
-            });
-        }
-
-        const categoryItem = $(`<li class="nav-item"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">${category}</a><div class="dropdown-menu"></div></li>`).mousemove(function () {
-            addCompany(category);
-        });
-        parent.append(categoryItem);
-    });
-
-}
-
-showCategory();
-
-function showPopularProd () {
-    Object.keys(products.Popular).map(company => {
-        console.log(products);
-        const parent = $('.popular-products .out-item');
-        const h4 = $(`<h6>${products.Popular[company].name}</h6>`);
-        parent.append(h4);
-
-        products.Popular[company].items.map((item, index) => {
-            console.log(item);
-            const parent = $('.popular-products .out-item');
-            const itemBlock = $(`<div class="col-3 item"></div>`);
-            const itemBody = $(`<div class="body"><img src="${item.src}"><span>${item.name}</span><br><span>$${item.price}</span></div>`);
-            const itemBtn = $('<div class="row btns"><button class="btn bg-info btn-sm">В корзину</button><button class="btn bg-warning btn-sm">Оформить заказ</button></div>');
-            itemBlock.append(itemBody, itemBtn);
-            itemBlock.attr({
-                'data-category': 'popular',
-                'data-compmany': products.Popular[company].name.toLowerCase(),
-                'data-index': index
-            });
-            parent.append(itemBlock);
-        });
-
-    });
 }
