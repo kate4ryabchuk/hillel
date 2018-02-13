@@ -77,21 +77,74 @@ function addPopularItems () {
 
 }
 
+
+function showCategory () {
+    const parent = $('#navbar .nav');
+
+    Object.keys(products).map(category => {
+        function addCompany (userCompany) {
+            let parent = $('#navbar .dropdown-menu');
+            parent.text('');
+
+            Object.keys(products[userCompany]).map(company => {
+                // заходим в компании
+                //console.log(products[category][company]);
+
+                const itemCompany = $(`<a class="dropdown-item" href="#">${company}</a>`);
+                parent.append(itemCompany);
+            });
+        }
+
+        const categoryItem = $(`<li class="nav-item"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">${category}</a><div class="dropdown-menu"></div></li>`).mousemove(function () {
+            addCompany(category);
+        });
+        parent.append(categoryItem);
+    });
+
+}
+
+showCategory();
+
+// function showCompany (category, itemParent) {
+//
+//     $('#navbar .list-group ul').html('');
+//
+//     let ul = $('<ul class="list-group"></ul>');
+//
+//
+//
+//     Object.keys(products[category]).map(company => {
+//         // заходим в компании
+//         //console.log(products[category][company]);
+//
+//         const li = $(`<li class="list-group-item list-group-item-action">${company}</li>`);
+//         ul.append(li);
+//
+//
+//         console.log(company);
+//     });
+//     itemParent.append(ul);
+// }
+
 function showPopularProd () {
-    Object.keys(products.popular).map(company => {
+    Object.keys(products.Popular).map(company => {
         console.log(products);
         const parent = $('.popular-products .out-item');
-        const h4 = $(`<h6>${products.popular[company].name}</h6>`);
+        const h4 = $(`<h6>${products.Popular[company].name}</h6>`);
         parent.append(h4);
 
-        products.popular[company].items.map((item, index) => {
+        products.Popular[company].items.map((item, index) => {
             console.log(item);
             const parent = $('.popular-products .out-item');
             const itemBlock = $(`<div class="col-3 item"></div>`);
             const itemBody = $(`<img src="${item.src}"><span>${item.name}</span><br><span>$${item.price}</span>`);
             const itemBtn = $('<div class="row btns"><button class="btn bg-info btn-sm">В корзину</button><button class="btn bg-warning btn-sm">Оформить заказ</button></div>');
             itemBlock.append(itemBody, itemBtn);
-            itemBlock.attr({'data-category':'popular', 'data-compmany': products.popular[company].name.toLowerCase(), 'data-index': index});
+            itemBlock.attr({
+                'data-category': 'popular',
+                'data-compmany': products.Popular[company].name.toLowerCase(),
+                'data-index': index
+            });
             parent.append(itemBlock);
         });
 

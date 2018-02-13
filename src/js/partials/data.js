@@ -1,5 +1,5 @@
 const products = {
-    phones: {
+    Phone: {
         apple: {
             name: "Apple",
             items: [
@@ -78,7 +78,7 @@ const products = {
 
     },
 
-    notebooks: {
+    Notebook: {
         apple: {
             name: "Apple",
             items: [
@@ -157,7 +157,7 @@ const products = {
 
     },
 
-    popular: {
+    Popular: {
         apple: {
             name: "Apple",
             items: [
