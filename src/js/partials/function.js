@@ -1,3 +1,4 @@
+// вход в аккаунт, после проверки логина и пароля
 function validateSing (name, password) {
     let validateLog = Object.keys(users).some(validateLogin);
     const loginVal = name.val();
@@ -34,11 +35,11 @@ function validateSing (name, password) {
     }
 
 }
-
+// проверка пароля
 function validateLogin (val) {
     return $('#login').val() === val
 }
-
+// проверяем sessionStorage
 function getUserStory () {
     const userStory = JSON.parse(sessionStorage.getItem('userEnter'));
 
@@ -50,11 +51,11 @@ function getUserStory () {
         console.log(users[name]);
     }
 }
-
+// отображаем аккаунт
 function addAccount (user) {
     $('.account').text('').append($('<h4>Аккаунт</h4>'), $(`<h3>${users[user].name}</h3>`));
 }
-
+// добовляем компании
 function addCompany (userCompany) {
     let parent = $('#navbar .dropdown-menu');
     parent.text('');
@@ -66,7 +67,7 @@ function addCompany (userCompany) {
     const itemAll = $(`<a class="dropdown-item" href="#">All</a>`);
     parent.prepend(itemAll);
 }
-
+// отображаем популярные товары
 function showPopularProd () {
     Object.keys(products.Popular).map(company => {
         const parent = $('.popular-products .out-item'),
@@ -88,7 +89,7 @@ function showPopularProd () {
         });
     });
 }
-
+// отображаем категории
 function showCategory () {
     const parent = $('#navbar .nav');
     Object.keys(products).map(category => {
@@ -98,7 +99,7 @@ function showCategory () {
         parent.append(categoryItem);
     });
 }
-
+// образец прохода по продуктам
 function addPopularItems () {
 
     Object.keys(products).map(category => {
