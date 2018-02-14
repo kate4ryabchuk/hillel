@@ -35,10 +35,12 @@ function validateSing (name, password) {
     }
 
 }
+
 // проверка пароля
 function validateLogin (val) {
     return $('#login').val() === val
 }
+
 // проверяем sessionStorage
 function getUserStory () {
     const userStory = JSON.parse(sessionStorage.getItem('userEnter'));
@@ -51,31 +53,38 @@ function getUserStory () {
         console.log(users[name]);
     }
 }
+
 // отображаем аккаунт
 function addAccount (user) {
     $('.account').text('').append($('<h4>Аккаунт</h4>'), $(`<h3>${users[user].name}</h3>`));
 }
+
 // добовляем компании
 function addCompany (userCompany) {
-    let parent = $('#navbar .dropdown-menu');
+    const parent = $('#navbar').find('.dropdown-menu');
     parent.text('');
 
     Object.keys(products[userCompany]).map(company => {
-        const itemCompany = $(`<a class="dropdown-item" href="#">${products[userCompany][company].name}</a>`);
+        const itemCompany = $(`<a class="dropdown-item" href="#" data-category=${userCompany} data-company="${company}">${products[userCompany][company].name}</a>`);
+        itemCompany.click(function (e) {
+            showItem(e);
+        });
         parent.append(itemCompany);
     });
     const itemAll = $(`<a class="dropdown-item" href="#">All</a>`);
     parent.prepend(itemAll);
 }
+
 // отображаем популярные товары
 function showPopularProd () {
     Object.keys(products.Popular).map(company => {
-        const parent = $('.popular-products .out-item'),
+        const parent = $('.products .out-item'),
               h4 = $(`<h6>${products.Popular[company].name}</h6>`);
         parent.append(h4);
 
         products.Popular[company].items.map((item, index) => {
-            const parent = $('.popular-products .out-item'),
+            // потом выкинуть в отдельную функцию
+            const parent = $('.products .out-item'),
                   itemBlock = $(`<div class="col-3 item"></div>`),
                   itemBody = $(`<div class="body"><img src="${item.src}"><span>${item.name}</span><br><span>$${item.price}</span></div>`),
                   itemBtn = $('<div class="row btns"><button class="btn bg-info btn-sm">В корзину</button><button class="btn bg-warning btn-sm">Оформить заказ</button></div>');
@@ -89,9 +98,10 @@ function showPopularProd () {
         });
     });
 }
+
 // отображаем категории
 function showCategory () {
-    const parent = $('#navbar .nav');
+    const parent = $('#navbar').find('.nav');
     Object.keys(products).map(category => {
         const categoryItem = $(`<li class="nav-item"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">${category}</a><div class="dropdown-menu"></div></li>`).mousemove(function () {
             addCompany(category);
@@ -99,6 +109,30 @@ function showCategory () {
         parent.append(categoryItem);
     });
 }
+
+// фильтрация товаров
+function showItem (e) {
+    $('.products .out-item').text('');
+    const category = $(e.target).attr('data-category'),
+          company = $(e.target).attr('data-company');
+
+    products[category][company].items.map((item, index) => {
+        // потом выкинуть в отдельную функцию
+        const parent = $('.products .out-item'),
+              itemBlock = $(`<div class="col-3 item"></div>`),
+              itemBody = $(`<div class="body"><img src="${item.src}"><span>${item.name}</span><br><span>$${item.price}</span></div>`),
+              itemBtn = $('<div class="row btns"><button class="btn bg-info btn-sm">В корзину</button><button class="btn bg-warning btn-sm">Оформить заказ</button></div>');
+        itemBlock.append(itemBody, itemBtn);
+        itemBlock.attr({
+            'data-category': category,
+            'data-compmany': company,
+            'data-index': index
+        });
+        parent.append(itemBlock);
+
+    });
+}
+
 // образец прохода по продуктам
 function addPopularItems () {
 

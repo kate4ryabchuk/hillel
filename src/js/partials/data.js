@@ -6,22 +6,26 @@ const products = {
                 {
                     name: 'Iphone X',
                     price: 1500,
-                    amount: 33
+                    amount: 33,
+                    src: "../../img/iphone_x.jpg"
                 },
                 {
                     name: 'Iphone 8',
                     price: 1200,
-                    amount: 30
+                    amount: 30,
+                    src: "../../img/iphone8.jpeg"
                 },
                 {
                     name: 'Iphone 7 Plus',
                     price: 1150,
-                    amount: 22
+                    amount: 22,
+                    src: "../../img/iphone7plus.jpg"
                 },
                 {
                     name: 'Iphone 6S',
                     price: 820,
-                    amount: 17
+                    amount: 17,
+                    src: "../../img/iphone6s.jpg"
                 }
             ]
         },
@@ -85,7 +89,8 @@ const products = {
                 {
                     name: 'Macbook pro TB Retina',
                     price: 5000,
-                    amount: 13
+                    amount: 13,
+                    src: "../../img/macbook.jpg"
                 },
                 {
                     name: 'Macbook air',
@@ -171,7 +176,7 @@ const products = {
                     name: 'Iphone X',
                     price: 1500,
                     amount: 33,
-                    src: "../../img/aphone_x.jpg"
+                    src: "../../img/iphone_x.jpg"
                 }
             ]
         }
